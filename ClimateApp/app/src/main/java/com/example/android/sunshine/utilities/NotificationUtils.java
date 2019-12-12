@@ -21,21 +21,12 @@ import com.example.android.sunshine.data.WeatherContract;
 
 public class NotificationUtils {
 
-    /*
-     * The columns of data that we are interested in displaying within our notification to let
-     * the user know there is new weather data available.
-     */
     public static final String[] WEATHER_NOTIFICATION_PROJECTION = {
             WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,
             WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
             WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
     };
 
-    /*
-     * We store the indices of the values in the array of Strings above to more quickly be able
-     * to access the data from our query. If the order of the Strings above changes, these
-     * indices must be adjusted to match the order of the Strings.
-     */
     public static final int INDEX_WEATHER_ID = 0;
     public static final int INDEX_MAX_TEMP = 1;
     public static final int INDEX_MIN_TEMP = 2;
@@ -112,19 +103,6 @@ public class NotificationUtils {
 
             notificationManager.notify(WEATHER_NOTIFICATOIN_ID, notificationBuilder.build());
 
-//          TODO (2) Use NotificationCompat.Builder to begin building the notification
-
-//          TODO (3) Create an Intent with the proper URI to start the DetailActivity
-
-//          TODO (4) Use TaskStackBuilder to create the proper PendingIntent
-
-//          TODO (5) Set the content Intent of the NotificationBuilder
-
-//          TODO (6) Get a reference to the NotificationManager
-
-//          TODO (7) Notify the user with the ID WEATHER_NOTIFICATION_ID
-
-//          TODO (8) Save the time at which the notification occurred using SunshinePreferences
             SunshinePreferences.saveLastNotificationTime(context, System.currentTimeMillis());
         }
 
@@ -133,14 +111,6 @@ public class NotificationUtils {
     }
 
     /**
-     * Constructs and returns the summary of a particular day's forecast using various utility
-     * methods and resources for formatting. This method is only used to create the text for the
-     * notification that appears when the weather is refreshed.
-     * <p>
-     * The String returned from this method will look something like this:
-     * <p>
-     * Forecast: Sunny - High: 14°C Low 7°C
-     *
      * @param context   Used to access utility methods and resources
      * @param weatherId ID as determined by Open Weather Map
      * @param high      High temperature (either celsius or fahrenheit depending on preferences)
