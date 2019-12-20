@@ -28,15 +28,6 @@ import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.sync.SunshineSyncUtils;
 
-/**
- * The SettingsFragment serves as the display for all of the user's settings. In Sunshine, the
- * user will be able to change their preference for units of measurement from metric to imperial,
- * set their preferred weather location, and indicate whether or not they'd like to see
- * notifications.
- *
- * Please note: If you are using our dummy weather services, the location returned will always be
- * Mountain View, California.
- */
 public class SettingsFragment extends PreferenceFragmentCompat implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -44,22 +35,19 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         String stringValue = value.toString();
 
         if (preference instanceof ListPreference) {
-            // For list preferences, look up the correct display value in
-            // the preference's 'entries' list (since they have separate labels/values).
+
             ListPreference listPreference = (ListPreference) preference;
             int prefIndex = listPreference.findIndexOfValue(stringValue);
             if (prefIndex >= 0) {
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
         } else {
-            // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
         }
     }
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
-        // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
@@ -95,12 +83,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         Activity activity = getActivity();
 
         if (key.equals(getString(R.string.pref_location_key))) {
-            // we've changed the location
-            // Wipe out any potential PlacePicker latlng values so that we can use this text entry.
+
             SunshinePreferences.resetLocationCoordinates(activity);
             SunshineSyncUtils.startImmediateSync(activity);
         } else if (key.equals(getString(R.string.pref_units_key))) {
-            // units have changed. update lists of weather entries accordingly
             activity.getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
         }
         Preference preference = findPreference(key);
