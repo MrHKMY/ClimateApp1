@@ -155,7 +155,13 @@ public final class SunshinePreferences {
         return spContainBothLatitudeAndLongitude;
     }
 
-
+    /**
+     * Returns true if the user prefers to see notifications from Sunshine, false otherwise. This
+     * preference can be changed by the user within the SettingsFragment.
+     *
+     * @param context Used to access SharedPreferences
+     * @return true if the user prefers to see notifications, false otherwise
+     */
     public static boolean areNotificationsEnabled(Context context) {
         /* Key for accessing the preference for showing notifications */
         String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
