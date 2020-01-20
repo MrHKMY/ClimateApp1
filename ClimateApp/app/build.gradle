@@ -16,6 +16,9 @@ android {
             minifyEnabled false
         }
     }
+    
+        dataBinding.enabled = true
+
 }
 
 dependencies {
